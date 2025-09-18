@@ -34,7 +34,7 @@ jobs:
 
       - name: List build artifacts
         run: |
-          dir dist /s
+          Get-ChildItem -Path . -Recurse -Name | Where-Object { $_ -like "*dist*" -or $_ -like "*build*" }
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4
