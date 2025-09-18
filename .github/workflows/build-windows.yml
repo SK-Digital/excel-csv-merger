@@ -27,7 +27,7 @@ jobs:
       - name: Build Vite app
         run: |
           bun run build
-          
+
       - name: Build Neutralino app
         run: |
           bunx --bun neu build --release

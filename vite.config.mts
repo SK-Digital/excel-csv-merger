@@ -45,8 +45,10 @@ const buntralino = (): PluginOption => [{
     apply: 'build',
     enforce: 'post',
     async closeBundle() {
-        // Build Buntralino after Vite builds
-        await Bun.$`buntralino build ${bunIndex}`;
+        // Only build Buntralino if not in CI environment (GitHub Actions)
+        if (!process.env.CI) {
+            await Bun.$`buntralino build ${bunIndex}`;
+        }
     },
 }];
 
