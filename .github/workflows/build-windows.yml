@@ -24,26 +24,30 @@ jobs:
         run: |
           bun install
 
-      - name: Build the application
+      - name: Build Vite app
         run: |
-          bun run build:windows
+          bun run build
+          
+      - name: Build Neutralino app
+        run: |
+          bunx --bun neu build --release
 
       - name: List build artifacts
         run: |
-          dir build /s
+          dir dist /s
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4
         with:
           name: windows-executable
-          path: build/Windows x64/
+          path: dist/
           retention-days: 30
 
       - name: Create Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v1
         with:
-          files: build/Windows x64/*
+          files: dist/*
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
           body: |
