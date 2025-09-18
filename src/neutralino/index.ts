@@ -1,5 +1,4 @@
 import neutralino from '@neutralinojs/lib';
-neutralino.init();
 import * as buntralino from 'buntralino-client';
 
 // Excel/CSV Merger App
@@ -11,14 +10,23 @@ class ExcelCSVMergerApp {
 
   constructor() {
     this.initializeApp();
-    this.setupEventListeners();
   }
 
-  private initializeApp(): void {
-    // Initialize the app when DOM is loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.setupEventListeners());
-    } else {
+  private async initializeApp(): Promise<void> {
+    try {
+      // Wait for Neutralino.js to be ready
+      await neutralino.init();
+      console.log('Neutralino.js initialized successfully');
+      
+      // Initialize the app when DOM is loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => this.setupEventListeners());
+      } else {
+        this.setupEventListeners();
+      }
+    } catch (error) {
+      console.error('Failed to initialize Neutralino.js:', error);
+      // Fallback: still set up event listeners even if Neutralino fails
       this.setupEventListeners();
     }
   }
