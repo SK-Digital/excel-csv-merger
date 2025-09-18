@@ -1,0 +1,69 @@
+name: Build Desktop Executables
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build the application
+        run: |
+          npm run build:neutralino
+
+      - name: List build artifacts
+        run: |
+          dir dist /s
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-executable
+          path: dist/
+          retention-days: 30
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Windows executable for Excel/CSV Merger Tool
+
+            **Download the .exe file from the assets below.**
+
+            ## How to use:
+            1. Download the .exe file
+            2. Run it directly (no installation required)
+            3. Select your Excel/CSV files to merge
+
+            ## Features:
+            - Merge multiple Excel and CSV files
+            - Automatic column detection
+            - Export to Excel or CSV format
+            - Native file dialogs
+            - Drag and drop support
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
