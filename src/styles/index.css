@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-600;
+  }
+  
+  body {
+    @apply bg-dark-900 text-gray-100 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-700 hover:bg-dark-600 text-gray-200 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+  
+  .card {
+    @apply bg-dark-800 border border-dark-700 rounded-xl p-6 shadow-lg;
+  }
+  
+  .input-field {
+    @apply bg-dark-700 border border-dark-600 text-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors duration-200;
+  }
+  
+  .file-drop-zone {
+    @apply border-2 border-dashed border-teal-400 rounded-xl p-8 text-center transition-colors duration-200 hover:border-teal-300 hover:bg-teal-950/20;
+  }
+  
+  .file-drop-zone.dragover {
+    @apply border-teal-300 bg-teal-950/30;
+  }
+  
+  .table-container {
+    @apply overflow-x-auto rounded-lg border border-dark-700;
+  }
+  
+  .table {
+    @apply w-full text-sm text-left text-gray-300;
+  }
+  
+  .table thead {
+    @apply text-xs text-gray-400 uppercase bg-dark-800;
+  }
+  
+  .table th {
+    @apply px-6 py-3 font-medium tracking-wider;
+  }
+  
+  .table td {
+    @apply px-6 py-4 whitespace-nowrap;
+  }
+  
+  .table tbody tr {
+    @apply bg-dark-900 border-b border-dark-700 hover:bg-dark-800 transition-colors duration-150;
+  }
+  
+  .status-success {
+    @apply text-teal-400;
+  }
+  
+  .status-warning {
+    @apply text-yellow-400;
+  }
+  
+  .status-error {
+    @apply text-red-400;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full h-4 w-4 border-b-2 border-teal-500;
+  }
+}

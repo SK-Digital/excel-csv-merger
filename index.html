@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel/CSV Merger</title>
+    <link rel="stylesheet" href="/src/styles/index.css">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div id="neutralinoapp">
+        <div class="min-h-screen bg-dark-900 text-gray-100">
+            <!-- Header -->
+            <header class="bg-dark-800 border-b border-dark-700 px-6 py-4">
+                <div class="flex items-center justify-center">
+                    <h1 class="text-2xl font-bold text-teal-400">Excel/CSV Merger</h1>
+                </div>
+            </header>
+            
+            <main class="p-6 space-y-6">
+                <!-- File Upload Section -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-teal-300 text-center">Upload Files</h2>
+                    <div id="dropZone" class="file-drop-zone mb-4">
+                        <div class="flex flex-col items-center space-y-4">
+                            <svg class="w-12 h-12 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <div class="text-center">
+                                <p class="text-lg font-medium">Drop files here or click to browse</p>
+                                <p class="text-sm text-gray-400">Supports Excel (.xlsx, .xls) and CSV files</p>
+                            </div>
+                            <button id="chooseFilesBtn" class="btn-primary">
+                                Choose Files
+                            </button>
+                        </div>
+                    </div>
+                    <div id="uploadStatus" class="text-sm text-gray-400 text-center">No files uploaded</div>
+                </div>
+                
+                <!-- File List Section -->
+                <div class="card">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-semibold text-teal-300 text-center mb-4">Uploaded Files</h2>
+                        <div class="text-center">
+                            <button id="removeFileBtn" class="btn-danger" disabled>Remove Selected</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="w-12"><input type="checkbox" id="selectAll" class="rounded"></th>
+                                    <th>File Name</th>
+                                    <th>Type</th>
+                                    <th>Rows</th>
+                                    <th>Columns</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fileListBody">
+                                <tr>
+                                    <td colspan="6" class="text-center text-gray-500 py-8">No files uploaded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Column Analysis Section -->
+                <div class="card">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-semibold text-teal-300 text-center mb-4">Column Analysis</h2>
+                        <div class="text-center">
+                            <button id="analyzeBtn" class="btn-secondary" disabled>Analyze Columns</button>
+                        </div>
+                    </div>
+                    <div id="analysisStatus" class="text-sm text-gray-400 mb-4 text-center">Click 'Analyze Columns' to detect shared columns</div>
+                    <div id="sharedColumnsDisplay" class="bg-dark-700 rounded-lg p-4 min-h-[100px] hidden">
+                        <h3 class="font-medium mb-2 text-teal-300">Shared Columns:</h3>
+                        <div id="sharedColumnsList" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+                
+                <!-- Merge Options Section -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-teal-300 text-center">Merge Options</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-center">Merge Mode:</label>
+                            <div class="flex justify-center space-x-6">
+                                <label class="flex items-center">
+                                    <input type="radio" name="mergeMode" value="shared_columns" checked class="mr-2 text-teal-500">
+                                    <span>Use Shared Columns Only</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="mergeMode" value="same_columns" class="mr-2 text-teal-500">
+                                    <span>Assume Same Columns</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button id="mergeBtn" class="btn-primary" disabled>Merge Files</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Export Section -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4 text-teal-300 text-center">Export</h2>
+                    <div class="flex justify-center space-x-4">
+                        <button id="exportExcelBtn" class="btn-primary" disabled>Export to Excel</button>
+                        <button id="exportCsvBtn" class="btn-primary" disabled>Export to CSV</button>
+                    </div>
+                    <div id="exportStatus" class="mt-4 text-sm text-center"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Your app's bundled scripts -->
+    <script type="module" src="/src/neutralino/index.ts"></script>
+</body>
+</html>

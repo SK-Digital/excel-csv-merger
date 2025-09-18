@@ -1,0 +1,31 @@
+{
+  "name": "excel-csv-merger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build",
+    "build:neutralino": "bunx --bun vite build && bunx --bun neu build --release",
+    "start": "bunx --bun neu run"
+  },
+  "keywords": ["excel", "csv", "merger", "desktop", "buntralino"],
+  "author": "Your Name",
+  "license": "MIT",
+  "description": "Excel/CSV Merger Desktop App built with Buntralino",
+  "dependencies": {
+    "@neutralinojs/lib": "^5.6.0",
+    "buntralino": "^1.0.10",
+    "buntralino-client": "^1.0.7",
+    "execa": "^9.5.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@neutralinojs/neu": "^11.3.0",
+    "@types/bun": "^1.1.14",
+    "buntralino-cli": "^1.2.0",
+    "vite": "^6.1.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  }
+}
