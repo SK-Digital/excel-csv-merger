@@ -6,7 +6,7 @@
     "dev": "bunx --bun vite",
     "build": "bunx --bun vite build",
     "build:neutralino": "bunx --bun vite build && bunx --bun neu build --release",
-    "build:windows": "bunx --bun vite build && bunx --bun neu build --release",
+    "build:windows": "bunx --bun vite build && bunx --bun buntralino build src/bun/index.ts",
     "start": "bunx --bun neu run"
   },
   "keywords": ["excel", "csv", "merger", "desktop", "buntralino"],
