@@ -24,9 +24,13 @@ jobs:
         run: |
           bun install
 
-      - name: Build the application
+      - name: Build Vite app
         run: |
-          bun run build:neutralino
+          bun run build
+          
+      - name: Build Neutralino app
+        run: |
+          bunx --bun neu build --release
 
       - name: List build artifacts
         run: |
